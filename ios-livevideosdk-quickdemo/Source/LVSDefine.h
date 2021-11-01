@@ -7,8 +7,8 @@
 
 static NSString *const LVSLoginSuccessNotification = @"LVSLoginSuccessNotificationIdentifier";
 
-//融云 app key
-#define lvsAppKey  @"pvxdm17jpw7ar"
+//融云官网申请的 app key
+#define lvsAppKey  <#appKey#>
 
 //主色调
 #define lvsMainColor [UIColor colorFromHexString:@"#0099ff"]

@@ -7,7 +7,10 @@
 
 #import <Foundation/Foundation.h>
 
-static NSString *const kHost = @"http://10.40.0.97:8081/";  //@"https://apiv1-rcrtc.rongcloud.cn/"
+#warning 此处为己方的服务端host，需要部署由融云提供的服务端开源代码，此项为demo成功运行的前置条件
+#warning 服务端代码仓库 https://github.com/rongcloud/rongcloud-scene-server-bestcase
+//服务端 host
+static NSString *const kHost = <#Http Host#>;
 
 #pragma mark - network path
 
