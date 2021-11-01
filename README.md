@@ -23,7 +23,7 @@
 1. 点击列表进入直播间观看直播
 2. 点击 Start Live 开始直播
 
-![img](blob:https://c7r1ybaojd.feishu.cn/19680438-9a0a-4ac7-a0f6-a7aa7a2f4705)
+![image](https://github.com/rongcloud/rongcloud-livevideo-ios-quickdemo/blob/master/img/IMG_0001.PNG)
 
 #### 观众端
 
@@ -33,7 +33,7 @@
 4. 关闭直播
 5. 结束连麦
 
-![img](blob:https://c7r1ybaojd.feishu.cn/4f6477f1-f669-4719-8381-1bac53142717)
+![image](https://github.com/rongcloud/rongcloud-livevideo-ios-quickdemo/blob/master/img/IMG_0006.PNG)
 
 #### 主播端
 
@@ -47,7 +47,7 @@
    2. 踢出房间
 4. 关闭直播间
 
-![img](blob:https://c7r1ybaojd.feishu.cn/523877db-9b30-4f6c-9992-832b9278a199)
+![image](https://github.com/rongcloud/rongcloud-livevideo-ios-quickdemo/blob/master/img/IMG_0004.PNG)
 
 
 
