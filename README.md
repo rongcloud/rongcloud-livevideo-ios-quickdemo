@@ -2,19 +2,19 @@
 
 1. 注册融云开发者账号 
 
-   [注册开发者账号]: https://www.rongcloud.cn/
+   [注册开发者账号](https://www.rongcloud.cn/)
 
 2. 开通音视频服务权限 
 
-   [开通音视频服务权限]: https://doc.rongcloud.cn/livevideoroom/IOS/1.X/guides/rtc-service
+   [开通音视频服务权限](https://doc.rongcloud.cn/livevideoroom/IOS/1.X/guides/rtc-service)
 
 3. 部署后端服务，相应的服务端程序已开源，可以参考如下代码 
 
-   [服务端开源代码]: https://github.com/rongcloud/rongcloud-scene-server-bestcase
+   [服务端开源代码](https://github.com/rongcloud/rongcloud-scene-server-bestcase)
 
 4. 详细的接入流程可以参考接入文档 
 
-   [接入文档]: https://doc.rongcloud.cn/livevideoroom/IOS/1.X/guides/intro
+   [接入文档](https://doc.rongcloud.cn/livevideoroom/IOS/1.X/guides/intro) 
 
 ## 运行demo
 
