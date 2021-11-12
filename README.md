@@ -8,9 +8,9 @@
 
    [开通音视频服务权限](https://doc.rongcloud.cn/livevideoroom/IOS/1.X/guides/rtc-service)
 
-3. 部署后端服务，相应的服务端程序已开源，可以参考如下代码 
-
-   [服务端开源代码](https://github.com/rongcloud/rongcloud-scene-server-bestcase)
+3. 申请  `BusinessToken`
+   1. 此项服务会提供和AppId绑定的10名测试人员资格，您需联系销售人员获取相应的 BusinessToken, 
+   2. 成功获取到 BusinessToken 后，替换 LVSDefine.h 中定义的 BusinessToken
 
 4. 详细的接入流程可以参考接入文档 
 

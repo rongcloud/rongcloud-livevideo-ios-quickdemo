@@ -9,8 +9,14 @@
 #import "LVSNetworkConst.h"
 
 static NSDictionary * _header() {
+    NSString *businessToken = BusinessToken;
+    if (businessToken == nil || businessToken.length == 0) {
+        LVSLog(@"businessToken must be nonnull");
+        assert(0);
+    }
     return @{
-        @"Content-Type":@"application/json;charset=UTF-8"
+        @"Content-Type":@"application/json;charset=UTF-8",
+        @"BusinessToken":BusinessToken,
     };
 };
 
