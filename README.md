@@ -9,7 +9,7 @@
    [开通音视频服务权限](https://doc.rongcloud.cn/livevideoroom/IOS/1.X/guides/rtc-service)
 
 3. 申请  `BusinessToken`
-   1. 此项服务会提供和AppId绑定的10名测试人员资格，您需联系销售人员获取相应的 BusinessToken, 
+   1. 此项服务会提供和AppId绑定的10名测试人员资格，点击此处 [获取BusinessToken](https://rcrtc-api.rongcloud.net/code) 
    2. 成功获取到 BusinessToken 后，替换 LVSDefine.h 中定义的 BusinessToken
 
 4. 详细的接入流程可以参考接入文档 

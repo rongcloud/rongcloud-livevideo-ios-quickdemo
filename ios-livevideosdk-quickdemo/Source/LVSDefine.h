@@ -10,7 +10,7 @@ static NSString *const LVSLoginSuccessNotification = @"LVSLoginSuccessNotificati
 //融云官网申请的 app key
 #define lvsAppKey  @"pvxdm17jpw7ar"
 
-//联系融云销售获取 BusinessToken
+//请前往 https://rcrtc-api.rongcloud.net/code 获取 BusinessToken
 #define BusinessToken  <#BusinessToken#>
 
 //主色调
