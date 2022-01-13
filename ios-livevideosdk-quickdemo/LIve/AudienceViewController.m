@@ -35,7 +35,7 @@ static NSArray<NSNumber *> * _toolBarTypes() {
     ];
 }
 
-@interface AudienceViewController () <RCLiveVideoDelegate,LVSToolBarDelegate,LVSToolBarDataSource>
+@interface AudienceViewController () <RCLiveVideoDelegate,LVSToolBarDelegate,LVSToolBarDataSource,RCLiveVideoMixDelegate>
 @property (nonatomic, copy) NSString *roomId;
 @property (nonatomic, copy) NSString *roomName;
 @property (nonatomic, strong) LVSToolBar *toolBar;
@@ -57,6 +57,7 @@ static NSArray<NSNumber *> * _toolBarTypes() {
 - (void)viewDidLoad {
     [super viewDidLoad];
     RCLiveVideoEngine.shared.delegate = self;
+    RCLiveVideoEngine.shared.mixDelegate = self;
     [self addPreview];
     [self joinRoom];
     [self buildLayout];
@@ -66,7 +67,7 @@ static NSArray<NSNumber *> * _toolBarTypes() {
 
 /// 加入房间
 - (void)joinRoom {
-    [RCLiveVideoEngine.shared joinRoom:self.roomId completion:^(RCLiveVideoErrorCode code) {
+    [RCLiveVideoEngine.shared joinRoom:self.roomId completion:^(RCLiveVideoCode code) {
         if (code == RCLiveVideoSuccess) {
             LVSLog(@"audience join room success");
             [SVProgressHUD showSuccessWithStatus:LVSLocalizedString(@"create_join_success")];
@@ -85,29 +86,30 @@ static NSArray<NSNumber *> * _toolBarTypes() {
 }
 
 - (void)leaveRoom {
-    [RCLiveVideoEngine.shared leaveRoom:^(RCLiveVideoErrorCode code) {
+    [RCLiveVideoEngine.shared finish:^(RCLiveVideoCode code) {
         if (code == RCLiveVideoSuccess) {
 #warning 示例中房间退出失败不会返回上一个页面，接入方视情况自己处理
-            LVSLog(@"audience leave room success");
-            [SVProgressHUD showSuccessWithStatus:LVSLocalizedString(@"create_leave_success")];
+            LVSLog(@"finish live success")
+            [SVProgressHUD showSuccessWithStatus:@"离开房间"];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.navigationController popViewControllerAnimated:YES];
             });
+
         } else {
-            LVSLog(@"audience leave room failed code: %ld",(long)code);
-            [SVProgressHUD showSuccessWithStatus:LVSLocalizedString(@"create_leave_fail")];
+            LVSLog(@"finish live failed code: %ld",code);
+            [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:LVSLocalizedString(@"live_finish_live_fail"),code]];
         }
     }];
 }
 
 
-- (void)showAlert {
+- (void)showAlert:(NSString *)inviter {
     //收到主播的邀请消息，观众方处理请求
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:LVSLocalizedString(@"live_receive_host_invite") message:nil preferredStyle:UIAlertControllerStyleAlert];
     
     [alert addAction:[UIAlertAction actionWithTitle:LVSLocalizedString(@"reject") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        //同意连麦邀请
-        [RCLiveVideoEngine.shared rejectInvitation:^(RCLiveVideoErrorCode code) {
+        //拒绝连麦邀请
+        [RCLiveVideoEngine.shared rejectInvitationOfUser:inviter completion:^(RCLiveVideoCode code) {
             if (code == RCLiveVideoSuccess) {
                 LVSLog(@"audience reject host invication success");
             } else {
@@ -117,8 +119,8 @@ static NSArray<NSNumber *> * _toolBarTypes() {
         }];
     }]];
     [alert addAction:[UIAlertAction actionWithTitle:LVSLocalizedString(@"accept") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        //拒绝连麦邀请
-        [RCLiveVideoEngine.shared acceptInvitation:^(RCLiveVideoErrorCode code) {
+        //同意连麦邀请
+        [RCLiveVideoEngine.shared acceptInvitationOfUser:inviter atIndex:1 completion:^(RCLiveVideoCode code) {
             if (code == RCLiveVideoSuccess) {
                 LVSLog(@"audience accept host invication success");
             } else {
@@ -155,8 +157,8 @@ static NSArray<NSNumber *> * _toolBarTypes() {
 }
 
 /// 接收到上麦邀请：只有受邀请者收到回调
-- (void)liveVideoInvitationDidReceive {
-    [self showAlert];
+- (void)liveVideoInvitationDidReceive:(NSString *)inviter atIndex:(NSInteger)index {
+    [self showAlert:inviter];
 }
 
 /// 邀请上麦已被取消：只有受邀请者收到回调
@@ -165,7 +167,7 @@ static NSArray<NSNumber *> * _toolBarTypes() {
 }
 
 /// 直播连麦开始，通过申请、邀请等方式成功上麦后，接收回调。
-- (void)liveVideoDidBegin:(RCLiveVideoErrorCode)code {
+- (void)liveVideoDidBegin:(RCLiveVideoCode)code {
     [SVProgressHUD showSuccessWithStatus:LVSLocalizedString(@"live_start_boardcast")];
 }
 
@@ -176,25 +178,21 @@ static NSArray<NSNumber *> * _toolBarTypes() {
     return sampleBuffer;
 }
 
-/// 合流视频点击事件，点击直播用户时触发
-/// 注意：
-/// 请确保在布局preview时，可点击用户的视图不被遮挡。
-/// 如果preview被遮挡，请使用didLiveVideoLayout自定义事件点击视图
-/// @param userId 被点击的用户id
-- (void)liveVideoUserDidClick:(NSString *)userId {
-    
-}
-
-/// 当视频布局发生变化时，更新直播用户的位置
-/// @param frameInfo 直播用户布局信息
-/// 格式为：[userId: frame]，userId：用户id，frame：用户在preview的位置
-- (void)liveVideoUserDidLayout:(NSDictionary<NSString *, NSValue *> *)frameInfo {
+/// 自定义麦位视图
+/// @param seat 麦位对象
+/// @param frame 麦位在 previewView 中的位置
+- (void)liveVideoDidLayout:(RCLiveVideoSeat *)seat withFrame:(CGRect)frame {
     
 }
 
 /// 房间已关闭
 - (void)roomDidClosed {
     
+}
+
+//合流布局更新
+- (void)roomMixTypeDidChange:(RCLiveVideoMixType)mixType {
+    NSLog(@"mix type did change");
 }
 
 #pragma mark - LVSToolBarDataSource
@@ -218,7 +216,7 @@ static NSArray<NSNumber *> * _toolBarTypes() {
             //申请上麦
         case LVSToolBarActionTypeAudienceRequest:
 #warning requestLiveVideo 方法中index为麦序，根据不同的场景麦序不同，例如两人pk麦序为[0~1]、九宫格聊天室麦序为[0~8],index为您期望加入的位置，indxe = -1 时为就近麦序
-            [RCLiveVideoEngine.shared requestLiveVideo:-1 completion:^(RCLiveVideoErrorCode code) {
+            [RCLiveVideoEngine.shared requestLiveVideo:-1 completion:^(RCLiveVideoCode code) {
                 if (code == RCLiveVideoSuccess) {
                     LVSLog(@"live request post success");
                     [SVProgressHUD showSuccessWithStatus:LVSLocalizedString(@"live_request_success")];
@@ -230,7 +228,7 @@ static NSArray<NSNumber *> * _toolBarTypes() {
             break;
             //取消上麦申请
         case LVSToolBarActionTypeAudienceCancelRequest:
-            [RCLiveVideoEngine.shared cancelRequest:^(RCLiveVideoErrorCode code) {
+            [RCLiveVideoEngine.shared cancelRequest:^(RCLiveVideoCode code) {
                 if (code == RCLiveVideoSuccess) {
                     LVSLog(@"live request cancel success");
                     [SVProgressHUD showSuccessWithStatus:LVSLocalizedString(@"live_cancel_request_success")];
@@ -244,7 +242,7 @@ static NSArray<NSNumber *> * _toolBarTypes() {
         case LVSToolBarActionTypeGetRequestList:
             {
 
-                [RCLiveVideoEngine.shared getRequests:^(RCLiveVideoErrorCode code, NSArray<NSString *> * _Nonnull users) {
+                [RCLiveVideoEngine.shared getRequests:^(RCLiveVideoCode code, NSArray<NSString *> * _Nonnull users) {
                     if (code == RCLiveVideoSuccess) {
                         LVSLog(@"live fetch request users success");
                         if (users && users.count > 0) {
@@ -271,7 +269,7 @@ static NSArray<NSNumber *> * _toolBarTypes() {
             break;
         case LVSToolBarActionTypeLeaveFinishLive:
             {
-                [RCLiveVideoEngine.shared finishLiveVideo:[LVSUser uid] completion:^(RCLiveVideoErrorCode code) {
+                [RCLiveVideoEngine.shared leaveLiveVideo:^(RCLiveVideoCode code) {
                     if (code == RCLiveVideoSuccess) {
                         LVSLog(@"finish live success")
                         [SVProgressHUD showSuccessWithStatus:@"结束连麦"];
@@ -281,6 +279,7 @@ static NSArray<NSNumber *> * _toolBarTypes() {
                     }
                 }];
             }
+            break;
         case LVSToolBarActionTypeLeaveRoom:
             [self leaveRoom];
             break;

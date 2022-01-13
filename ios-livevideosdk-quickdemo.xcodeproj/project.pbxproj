@@ -358,6 +358,8 @@
 				DC6F3FB22727955800A9E553 /* Sources */,
 				DC6F3FB32727955800A9E553 /* Frameworks */,
 				DC6F3FB42727955800A9E553 /* Resources */,
+				21756071AC32A32E69CA70B5 /* [CP] Embed Pods Frameworks */,
+				2DEB37B92AC515A9B9B11074 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -395,6 +397,8 @@
 				DC6F3FD72727955800A9E553 /* Sources */,
 				DC6F3FD82727955800A9E553 /* Frameworks */,
 				DC6F3FD92727955800A9E553 /* Resources */,
+				37A6339A8CED9C0041AE825E /* [CP] Embed Pods Frameworks */,
+				F2B25AC46F6509E36C17C898 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -499,6 +503,57 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		21756071AC32A32E69CA70B5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ios-livevideosdk-quickdemo/Pods-ios-livevideosdk-quickdemo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ios-livevideosdk-quickdemo/Pods-ios-livevideosdk-quickdemo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ios-livevideosdk-quickdemo/Pods-ios-livevideosdk-quickdemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2DEB37B92AC515A9B9B11074 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ios-livevideosdk-quickdemo/Pods-ios-livevideosdk-quickdemo-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ios-livevideosdk-quickdemo/Pods-ios-livevideosdk-quickdemo-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ios-livevideosdk-quickdemo/Pods-ios-livevideosdk-quickdemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		37A6339A8CED9C0041AE825E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ios-livevideosdk-quickdemo-ios-livevideosdk-quickdemoUITests/Pods-ios-livevideosdk-quickdemo-ios-livevideosdk-quickdemoUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ios-livevideosdk-quickdemo-ios-livevideosdk-quickdemoUITests/Pods-ios-livevideosdk-quickdemo-ios-livevideosdk-quickdemoUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ios-livevideosdk-quickdemo-ios-livevideosdk-quickdemoUITests/Pods-ios-livevideosdk-quickdemo-ios-livevideosdk-quickdemoUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		4532069F19DB5CE13D4BC640 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -541,6 +596,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F2B25AC46F6509E36C17C898 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ios-livevideosdk-quickdemo-ios-livevideosdk-quickdemoUITests/Pods-ios-livevideosdk-quickdemo-ios-livevideosdk-quickdemoUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ios-livevideosdk-quickdemo-ios-livevideosdk-quickdemoUITests/Pods-ios-livevideosdk-quickdemo-ios-livevideosdk-quickdemoUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ios-livevideosdk-quickdemo-ios-livevideosdk-quickdemoUITests/Pods-ios-livevideosdk-quickdemo-ios-livevideosdk-quickdemoUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
