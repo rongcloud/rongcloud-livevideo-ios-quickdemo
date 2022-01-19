@@ -132,6 +132,28 @@ static inline void _responseHandler(Class responseClase, NSDictionary *responseO
     [[self shareInstance] POST:np_fetch_user_info parameters:param auth:YES responseClass:responseClass success:success failure:failure];
 }
 
++ (void)fetchOthers:(nullable Class)responseClass
+            success:(nullable LVSSuccessCompletion)success
+            failure:(nullable LVSFailureCompletion)failure {
+    [[self shareInstance] GET:np_fetch_others
+                   parameters:nil
+                         auth:YES
+                responseClass:responseClass
+                      success:success
+                      failure:failure];
+}
+
++ (void)updateCurrentRoom:(NSString *)roomId
+            responseClass:(nullable Class)responseClass
+                  success:(nullable LVSSuccessCompletion)success
+                  failure:(nullable LVSFailureCompletion)failure {
+    NSDictionary *param = @{
+        @"roomId":roomId,
+    };
+    
+    [[self shareInstance] GET:np_update_room parameters:param auth:YES responseClass:responseClass success:success failure:failure];
+}
+
 - (NSURLSessionDataTask *)POST:(NSString *)URLString
                     parameters:(id)parameters
                           auth:(BOOL)auth

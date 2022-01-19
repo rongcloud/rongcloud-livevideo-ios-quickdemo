@@ -86,7 +86,7 @@ static NSArray<NSNumber *> * _toolBarTypes() {
 }
 
 - (void)leaveRoom {
-    [RCLiveVideoEngine.shared finish:^(RCLiveVideoCode code) {
+    [RCLiveVideoEngine.shared leaveRoom:^(RCLiveVideoCode code) {
         if (code == RCLiveVideoSuccess) {
 #warning 示例中房间退出失败不会返回上一个页面，接入方视情况自己处理
             LVSLog(@"finish live success")

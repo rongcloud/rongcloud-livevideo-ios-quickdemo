@@ -11,7 +11,7 @@ static NSString *const LVSLoginSuccessNotification = @"LVSLoginSuccessNotificati
 #define lvsAppKey  @"pvxdm17jpw7ar"
 
 //请前往 https://rcrtc-api.rongcloud.net/code 获取 BusinessToken
-#define BusinessToken  <#BusinessToken#>
+#define BusinessToken  @"vStHYPdrQoImm-7Ur0ks1g"
 
 //主色调
 #define lvsMainColor [UIColor colorFromHexString:@"#0099ff"]

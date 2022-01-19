@@ -106,6 +106,16 @@ NS_ASSUME_NONNULL_BEGIN
                     responseClass:(nullable Class)responseClass
                           success:(nullable LVSSuccessCompletion)success
                           failure:(nullable LVSFailureCompletion)failure;
+
++ (void)fetchOthers:(nullable Class)responseClass
+            success:(nullable LVSSuccessCompletion)success
+            failure:(nullable LVSFailureCompletion)failure;
+
++ (void)updateCurrentRoom:(NSString *)roomId
+            responseClass:(nullable Class)responseClass
+                  success:(nullable LVSSuccessCompletion)success
+                  failure:(nullable LVSFailureCompletion)failure;
+
 @end
 
 NS_ASSUME_NONNULL_END

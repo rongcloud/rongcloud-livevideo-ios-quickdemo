@@ -32,3 +32,6 @@ static NSString *const np_room_users_list = @"mic/room/%@/members";
 //获取用户信息
 static NSString *const np_fetch_user_info = @"user/batch";
 
+static NSString *const np_fetch_others = @"mic/room/online/created/list";
+
+static NSString *const np_update_room = @"user/change";

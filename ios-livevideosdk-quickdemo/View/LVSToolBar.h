@@ -14,6 +14,7 @@ typedef NS_ENUM(NSUInteger, LVSToolBarActionType) {
     LVSToolBarActionTypeHostCancelInvite,
     LVSToolBarActionTypeGetRoomUsers,
     LVSToolBarActionTypeGetRequestList,
+    LVSToolBarActionTypePK,
     LVSToolBarActionTypeLeaveRoom,
     LVSToolBarActionTypeLeaveFinishLive,
 };

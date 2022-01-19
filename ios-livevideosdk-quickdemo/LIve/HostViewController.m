@@ -13,6 +13,9 @@
 #import "LVSUserListView.h"
 #import "LVSLiveInfoView.h"
 #import "LVSUser.h"
+#import "LVSRoomListResponse.h"
+#import "LVSRoomOthersResponse.h"
+#import "LVSUpdateRoomResponse.h"
 
 static CGFloat kToolBarHeight = 120.f;
 
@@ -21,6 +24,7 @@ static NSArray<NSString *> * _toolBarTitles() {
         @"申请上麦列表",
         @"邀请上麦列表",
         @"观众列表",
+        @"PK",
         @"关闭直播间",
     ];
 }
@@ -30,11 +34,12 @@ static NSArray<NSNumber *> * _toolBarTypes() {
         @(LVSToolBarActionTypeGetRequestList),
         @(LVSToolBarActionTypeHostInvite),
         @(LVSToolBarActionTypeGetRoomUsers),
+        @(LVSToolBarActionTypePK),
         @(LVSToolBarActionTypeLeaveRoom),
     ];
 }
 
-@interface HostViewController () <RCLiveVideoDelegate,LVSToolBarDelegate,LVSToolBarDataSource,RCLiveVideoMixDelegate>
+@interface HostViewController () <RCLiveVideoDelegate,LVSToolBarDelegate,LVSToolBarDataSource,RCLiveVideoMixDelegate, RCLiveVideoPKDelegate>
 @property (nonatomic, strong, nullable) LVSCreateRoomData *roomData;
 @property (nonatomic, strong) LVSToolBar *toolBar;
 @property (nonatomic, strong) LVSUserListView *listView;
@@ -69,6 +74,8 @@ static NSArray<NSNumber *> * _toolBarTypes() {
     //布局代理
     RCLiveVideoEngine.shared.mixDelegate = self;
     
+    RCLiveVideoEngine.shared.pkDelegate = self;
+    
     //设置布局模式
     [RCLiveVideoEngine.shared setMixType:RCLiveVideoMixTypeOneToOne completion:^(RCLiveVideoCode code) {
         NSLog(@"set mix type error code %ld",code);
@@ -98,6 +105,7 @@ static NSArray<NSNumber *> * _toolBarTypes() {
             LVSCreateRoomResponse *res = (LVSCreateRoomResponse *)responseObject;
             if (res.data != nil) {
                 self.roomData = res.data;
+                [self updateRoom:res.data.roomId];
 #warning 创建房间成功后需要调用 begin 方法开始推流
                 [self begin];
                 [self.infoView updateLiveInfo:res.data.roomName roomId:res.data.roomId userName:[LVSUser userName] userId:[LVSUser uid]];
@@ -110,6 +118,14 @@ static NSArray<NSNumber *> * _toolBarTypes() {
         }
     } failure:^(NSError * _Nonnull error) {
         [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"%@ code: %ld",LVSLocalizedString(@"create_room_fail"),(long)error.code]];
+    }];
+}
+
+- (void)updateRoom:(NSString *)roomId {
+    [LVSWebService updateCurrentRoom:roomId responseClass:[LVSUpdateRoomResponse class] success:^(id  _Nullable responseObject) {
+        
+    } failure:^(NSError * _Nonnull error) {
+        
     }];
 }
 
@@ -130,19 +146,19 @@ static NSArray<NSNumber *> * _toolBarTypes() {
     //调用业务接口释放直播间
     [LVSWebService deleteRoomWithRoomId:self.roomData.roomId success:^(id  _Nullable responseObject) {
         LVSLog(@"network live room close success");
-        //调用 Engine finish 结束直播
-        [RCLiveVideoEngine.shared finish:^(RCLiveVideoCode code) {
-            if (code == RCLiveVideoSuccess) {
-                LVSLog(@"engine live room close success");
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.navigationController popViewControllerAnimated:YES];
-                });
-            } else {
-#warning 此处根据不同的业务需求需要自行处理直播结束异常的case
-                LVSLog(@"engine live room close fail code: %ld",(long)code);
-                [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"Engine %@ code: %ld",LVSLocalizedString(@"live_room_delete_fail"),(long)code]];
-            }
-        }];
+//        //调用 Engine finish 结束直播
+//        [RCLiveVideoEngine.shared leaveRoom:^(RCLiveVideoCode code) {
+//            if (code == RCLiveVideoSuccess) {
+//                LVSLog(@"engine live room close success");
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    [self.navigationController popViewControllerAnimated:YES];
+//                });
+//            } else {
+//#warning 此处根据不同的业务需求需要自行处理直播结束异常的case
+//                LVSLog(@"engine live room close fail code: %ld",(long)code);
+//                [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"Engine %@ code: %ld",LVSLocalizedString(@"live_room_delete_fail"),(long)code]];
+//            }
+//        }];
     } failure:^(NSError * _Nonnull error) {
         LVSLog(@"network live room close fail");
         [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"NetWork %@ code: %ld",LVSLocalizedString(@"live_room_delete_fail"),(long)error.code]];
@@ -289,7 +305,7 @@ static NSArray<NSNumber *> * _toolBarTypes() {
 }
 
 /// 直播连麦结束
-- (void)liveVideoDidFinish:(RCLivevideoFinishReason)reason {
+- (void)liveVideoDidFinish:(RCLiveVideoFinishReason)reason {
     [SVProgressHUD showInfoWithStatus:[NSString stringWithFormat:@"%@ reason: %ld",LVSLocalizedString(@"live_stop_boardcast"),reason]];
 }
 
@@ -309,6 +325,7 @@ static NSArray<NSNumber *> * _toolBarTypes() {
 }
 /// 房间已关闭
 - (void)roomDidClosed {
+    [self.navigationController popViewControllerAnimated:YES];
     [SVProgressHUD showSuccessWithStatus:LVSLocalizedString(@"live_end")];
 }
 
@@ -384,6 +401,24 @@ static NSArray<NSNumber *> * _toolBarTypes() {
                 }];
             }
             break;
+        case LVSToolBarActionTypePK:
+            if (RCLiveVideoEngine.shared.PK) {
+                [RCLiveVideoEngine.shared quitPK:^(RCLiveVideoCode code) {
+                    
+                }];
+            } else {
+                [LVSWebService fetchOthers:[LVSRoomOthersResponse class] success:^(id  _Nullable responseObject) {
+                    LVSRoomOthersResponse *response = responseObject;
+                    if (response.data == nil || response.data.count == 0) {
+                        [SVProgressHUD showSuccessWithStatus:@"数据加载失败"];
+                    } else {
+                        [self invitePKRooms:response.data];
+                    }
+                } failure:^(NSError * _Nonnull error) {
+                    [SVProgressHUD showSuccessWithStatus:error.localizedDescription];
+                }];
+            }
+            break;
             //关闭并推出直播间
         case LVSToolBarActionTypeLeaveRoom:
             [self close];
@@ -416,10 +451,39 @@ static NSArray<NSNumber *> * _toolBarTypes() {
                     }
                 }];
             }
-            break;;
+            break;
         default:
             break;
     }
+}
+
+#pragma mark - PK -
+
+- (void)invitePKRooms:(NSArray<LVSRoomListRoom *> *)rooms {
+    UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"在线" message:@"选择 PK 目标" preferredStyle:UIAlertControllerStyleActionSheet];
+    for (LVSRoomListRoom *room in rooms) {
+        UIAlertAction *action = [UIAlertAction actionWithTitle:room.roomName style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self invitePK:room];
+        }];
+        [controller addAction:action];
+    }
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    [controller addAction:action];
+    [self presentViewController:controller animated:YES completion:nil];
+}
+
+- (void)invitePK:(LVSRoomListRoom *)room {
+    [RCLiveVideoEngine.shared sendPKInvitation:room.roomId invitee:room.userId completion:^(RCLiveVideoCode code) {
+        LVSLog(@"send PK invitation %d", (int)code);
+    }];
+}
+
+#pragma mark - RCLiveVideoPKDelegate -
+
+- (void)didReceivePKInvitationFromRoom:(NSString *)inviterRoomId byUser:(NSString *)inviterUserId {
+    [RCLiveVideoEngine.shared acceptPKInvitation:inviterRoomId inviter:inviterUserId completion:^(RCLiveVideoCode code) {
+        LVSLog(@"accept PK %d", (int)code);
+    }];
 }
 
 #pragma mark - getter

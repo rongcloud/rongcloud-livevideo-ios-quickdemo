@@ -10,6 +10,9 @@
 		B137465020E2E1159B9CE845 /* Pods_ios_livevideosdk_quickdemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E69750CCCDB774A2320C8A16 /* Pods_ios_livevideosdk_quickdemo.framework */; };
 		BD937DADF432DC0DDD8A9151 /* Pods_ios_livevideosdk_quickdemo_ios_livevideosdk_quickdemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A8E0CB095333E51A3CF65CF /* Pods_ios_livevideosdk_quickdemo_ios_livevideosdk_quickdemoUITests.framework */; };
 		C9C093EF0A7786719E8E0526 /* Pods_ios_livevideosdk_quickdemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABC0637D3560B9DB3A36C2AC /* Pods_ios_livevideosdk_quickdemoTests.framework */; };
+		D7DBF29F27980FD300BD18ED /* LVSRoomOthersResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = D7DBF29E27980FD300BD18ED /* LVSRoomOthersResponse.m */; };
+		D7DBF2A2279815AF00BD18ED /* LVSUpdateRoomResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = D7DBF2A1279815AF00BD18ED /* LVSUpdateRoomResponse.m */; };
+		D7EB5E6C27980825005763DA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7EB5E6B27980825005763DA /* UIKit.framework */; };
 		DC2A1B83272F90140073246E /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = DC2A1B82272F90140073246E /* UIImage+Color.m */; };
 		DC4CB210272799CF00BD2539 /* LVSWebService.m in Sources */ = {isa = PBXBuildFile; fileRef = DC4CB209272799CF00BD2539 /* LVSWebService.m */; };
 		DC5321A72727DF9B007F36C8 /* LVSUser.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5321A62727DF9B007F36C8 /* LVSUser.m */; };
@@ -64,6 +67,11 @@
 		A90D01B636147C9DE8FB1765 /* Pods-ios-livevideosdk-quickdemo-ios-livevideosdk-quickdemoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-livevideosdk-quickdemo-ios-livevideosdk-quickdemoUITests.debug.xcconfig"; path = "Target Support Files/Pods-ios-livevideosdk-quickdemo-ios-livevideosdk-quickdemoUITests/Pods-ios-livevideosdk-quickdemo-ios-livevideosdk-quickdemoUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		ABC0637D3560B9DB3A36C2AC /* Pods_ios_livevideosdk_quickdemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ios_livevideosdk_quickdemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD342575CC2F995896614189 /* Pods-ios-livevideosdk-quickdemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-livevideosdk-quickdemoTests.release.xcconfig"; path = "Target Support Files/Pods-ios-livevideosdk-quickdemoTests/Pods-ios-livevideosdk-quickdemoTests.release.xcconfig"; sourceTree = "<group>"; };
+		D7DBF29D27980FD300BD18ED /* LVSRoomOthersResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LVSRoomOthersResponse.h; sourceTree = "<group>"; };
+		D7DBF29E27980FD300BD18ED /* LVSRoomOthersResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LVSRoomOthersResponse.m; sourceTree = "<group>"; };
+		D7DBF2A0279815AF00BD18ED /* LVSUpdateRoomResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LVSUpdateRoomResponse.h; sourceTree = "<group>"; };
+		D7DBF2A1279815AF00BD18ED /* LVSUpdateRoomResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LVSUpdateRoomResponse.m; sourceTree = "<group>"; };
+		D7EB5E6B27980825005763DA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		DB1007166E0F94BA5EF5B7AA /* Pods-ios-livevideosdk-quickdemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-livevideosdk-quickdemo.debug.xcconfig"; path = "Target Support Files/Pods-ios-livevideosdk-quickdemo/Pods-ios-livevideosdk-quickdemo.debug.xcconfig"; sourceTree = "<group>"; };
 		DC2A1B81272F90140073246E /* UIImage+Color.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+Color.h"; sourceTree = "<group>"; };
 		DC2A1B82272F90140073246E /* UIImage+Color.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Color.m"; sourceTree = "<group>"; };
@@ -133,6 +141,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B137465020E2E1159B9CE845 /* Pods_ios_livevideosdk_quickdemo.framework in Frameworks */,
+				D7EB5E6C27980825005763DA /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,6 +180,7 @@
 		BA3FCA00235C5A6A4AC5C45C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D7EB5E6B27980825005763DA /* UIKit.framework */,
 				E69750CCCDB774A2320C8A16 /* Pods_ios_livevideosdk_quickdemo.framework */,
 				6A8E0CB095333E51A3CF65CF /* Pods_ios_livevideosdk_quickdemo_ios_livevideosdk_quickdemoUITests.framework */,
 				ABC0637D3560B9DB3A36C2AC /* Pods_ios_livevideosdk_quickdemoTests.framework */,
@@ -243,6 +253,10 @@
 				DCA7AD9E272929840006FC6D /* LVSCreateRoomResponse.m */,
 				DCA7ADA0272945300006FC6D /* LVSRoomListResponse.h */,
 				DCA7ADA1272945300006FC6D /* LVSRoomListResponse.m */,
+				D7DBF29D27980FD300BD18ED /* LVSRoomOthersResponse.h */,
+				D7DBF29E27980FD300BD18ED /* LVSRoomOthersResponse.m */,
+				D7DBF2A0279815AF00BD18ED /* LVSUpdateRoomResponse.h */,
+				D7DBF2A1279815AF00BD18ED /* LVSUpdateRoomResponse.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -640,6 +654,8 @@
 				DCA7ADAE272957380006FC6D /* HomeTableViewCell.m in Sources */,
 				DCA7AD9C2728FAE90006FC6D /* HostViewController.m in Sources */,
 				DCA7ADB427296EF10006FC6D /* NSString+MD5.m in Sources */,
+				D7DBF29F27980FD300BD18ED /* LVSRoomOthersResponse.m in Sources */,
+				D7DBF2A2279815AF00BD18ED /* LVSUpdateRoomResponse.m in Sources */,
 				DC57929F2727AA34007A126F /* UIColor+Hex.m in Sources */,
 				DCA7ADBB272A7A500006FC6D /* LVSToolBar.m in Sources */,
 				DC6F3FFC272795E800A9E553 /* HomeViewController.m in Sources */,
@@ -823,13 +839,14 @@
 				CLANG_ENABLE_MODULES = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = TBA8VYLG4P;
+				DEVELOPMENT_TEAM = 69G8BQ9KQW;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/ios-livevideosdk-quickdemo/Source/PrefixHeader.pch";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "ios-livevideosdk-quickdemo/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = RCLiveVideoDemo;
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "RTC请求访问您的本地音乐，用于聊天室播放";
 				INFOPLIST_KEY_NSCameraUsageDescription = "RTC请求使用您的摄像头以视频直播，是否允许？";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "RTC请求使用您的麦克风以用来实时语音通讯，是否允许？";
@@ -845,7 +862,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = rcrtc.livevideosdk.com;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.rcrtc.livevideo.quickdemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -861,13 +878,14 @@
 				CLANG_ENABLE_MODULES = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = TBA8VYLG4P;
+				DEVELOPMENT_TEAM = 69G8BQ9KQW;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/ios-livevideosdk-quickdemo/Source/PrefixHeader.pch";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "ios-livevideosdk-quickdemo/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = RCLiveVideoDemo;
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "RTC请求访问您的本地音乐，用于聊天室播放";
 				INFOPLIST_KEY_NSCameraUsageDescription = "RTC请求使用您的摄像头以视频直播，是否允许？";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "RTC请求使用您的麦克风以用来实时语音通讯，是否允许？";
@@ -883,7 +901,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = rcrtc.livevideosdk.com;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.rcrtc.livevideo.quickdemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";

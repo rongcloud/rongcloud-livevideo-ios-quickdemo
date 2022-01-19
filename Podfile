@@ -6,7 +6,7 @@ target 'ios-livevideosdk-quickdemo' do
   use_frameworks!
 
   # Pods for ios-livevideosdk-quickdemo
-  pod 'RCLiveVideoLib'
+  pod 'RCLiveVideoLib', :git => 'ssh://gerrit.rongcloud.net:29418/rclivevideolib-ios'
   pod 'Masonry'
   pod 'SVProgressHUD'
   pod 'YYModel'
