@@ -79,6 +79,8 @@
 
 - (void)loginButtonClick:(UIButton *)button {
     
+    [SVProgressHUD show];
+    
     button.enabled = NO;
     
 #warning 此处为业务代码，接入方需要从自己的服务器获取到对应的登录信息
