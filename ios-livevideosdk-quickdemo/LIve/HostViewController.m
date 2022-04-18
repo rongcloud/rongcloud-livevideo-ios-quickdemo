@@ -304,8 +304,10 @@ static NSArray<NSNumber *> * _toolBarTypes() {
     [SVProgressHUD showSuccessWithStatus:LVSLocalizedString(@"live_start_boardcast")];
 }
 
+
+
 /// 直播连麦结束
-- (void)liveVideoDidFinish:(RCLivevideoFinishReason)reason {
+- (void)liveVideoDidFinish:(RCLiveVideoFinishReason)reason {
     [SVProgressHUD showInfoWithStatus:[NSString stringWithFormat:@"%@ reason: %ld",LVSLocalizedString(@"live_stop_boardcast"),reason]];
 }
 
