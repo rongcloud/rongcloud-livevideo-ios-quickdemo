@@ -1,4 +1,4 @@
-<h1 align="center"> 直播秀QuickDemo  </h>
+<h1 align="center"> 视频直播QuickDemo  </h>
 
 <p align="center">
 <img src="https://img.shields.io/cocoapods/v/RCLiveVideoLib.svg?style=flat" style="max-width: 100%;">
@@ -8,7 +8,7 @@
 
 ## 简介
 
-直播秀QuickDemo, 是融云针对视频直播场景设计的 SDK(RCLiveVideoLib),快速开箱使用示例。融合 RongIMLib 和 RongRTCLib 实现视频直播场景，将复杂逻辑（订阅和发布流、上下麦、连麦布局等）进行了封装，初步展示。
+视频直播QuickDemo, 是融云针对视频直播场景设计的 SDK(RCLiveVideoLib),快速开箱使用示例。融合 RongIMLib 和 RongRTCLib 实现视频直播场景，将复杂逻辑（订阅和发布流、上下麦、连麦布局等）进行了封装，初步展示。
 
 ## 环境要求
  * Xcode：确保与苹果官方同步更新
@@ -76,11 +76,7 @@ tip: 完整脑图请查看-> [^脚注2]
 
 如有任何疑问请提交 issue
 
-[^脚注1]:集成视频直播 SDK 打包增量大概 6 M（包含依赖库 IM 和 RTC）;
- RCLiveVideoLib 依赖IMLib和RTCLib ,依赖版本如下
-    * IMLib , '~> 5.1.7'
-    * RTCLib, '~> 5.1.16.1'
-    * RongRTCPlayer  #必须和 RTCLib 保持一致
+[^脚注1]:更多详情请看[融云开发文档:https://doc.rongcloud.cn/livevideoroom/IOS](https://doc.rongcloud.cn/livevideoroom/IOS/)
 
 
 [^脚注2]:livevideosdk-quickdemo主目录思维导图-相关链接: [https://rongcloud.yuque.com/docs/share/38847795-dde2-4034-a621-0cede4de3144?# 《livevideosdk-quickdemo主目录脑图》](https://rongcloud.yuque.com/docs/share/38847795-dde2-4034-a621-0cede4de3144?# 《livevideosdk-quickdemo主目录脑图》)
